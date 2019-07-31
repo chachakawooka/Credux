@@ -15,4 +15,7 @@ describe('Component', () => {
     unmountComponentAtNode(node)
   })
 
+  it('should be true', () => {
+    expect(true).toBe(true);
+  })
 })

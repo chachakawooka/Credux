@@ -1,0 +1,35 @@
+sudo: false
+
+language: node_js
+node_js:
+  - "stable"
+
+before_install:
+  - npm install codecov.io coveralls
+
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+  - node_modules
+  - build
+jobs:
+  include:
+    - stage: build
+      script:
+        - yarn test
+        - yarn build
+    - stage: npm
+      script: skip
+      deploy:
+        provider: npm
+        email: chachakawooka@googlemail.com
+        api_key: $NPM_TOKEN
+        on:
+          tags: true

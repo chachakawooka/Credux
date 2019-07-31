@@ -22,9 +22,10 @@ jobs:
         - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
         - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
     - stage: deploy
-      script: yarn add nwb
+      script: npm install -g nwb 
       deploy:
         provider: npm
+        skip_cleanup: true
         email: chachakawooka@googlemail.com
         api_key: $NPM_TOKEN
         on:

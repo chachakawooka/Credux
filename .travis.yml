@@ -21,8 +21,8 @@ jobs:
       after_success:
         - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
         - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-    - stage: npm
-      script: skip
+    - stage: deploy
+      script: yarn add nwb
       deploy:
         provider: npm
         email: chachakawooka@googlemail.com

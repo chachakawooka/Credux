@@ -4,28 +4,23 @@ language: node_js
 node_js:
   - "stable"
 
-before_install:
-  - yarn add codecov.io coveralls
-
-after_success:
-  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-
-branches:
-  only:
-    - master
-
 cache:
   directories:
   - node_modules
-  - build
+  - es
+  - lib
+
 jobs:
   include:
     - stage: build
       script:
+        - yarn add codecov.io coveralls
         - yarn install
         - yarn test
         - yarn build
+      after_success:
+        - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
     - stage: npm
       script: skip
       deploy:
@@ -33,4 +28,4 @@ jobs:
         email: chachakawooka@googlemail.com
         api_key: $NPM_TOKEN
         on:
-          tags: true
+          branch: master

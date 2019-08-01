@@ -21,4 +21,13 @@ export default class Crext {
         ));
     }
 
+    balanceGet(key,callback){
+        window.CREXT.balanceGet({key:key},(r) => {
+            if(r.success){
+                return callback(r.balance);
+            }
+            return callback(null);;
+        })
+    }
+
 }

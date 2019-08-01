@@ -20,6 +20,8 @@ class Test extends Component {
           <dl>
             <dt>state.User.key</dt>
             <dd>{this.props.User.key}</dd>
+            <dt>state.User.balance</dt>
+            <dd>{this.props.User.balance}</dd>
           </dl>
         }
       </div>

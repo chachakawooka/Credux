@@ -28,11 +28,15 @@ class Credux {
             this.authorise();
         }
 
-        //load user data on auth
+        //authorised
         if (this.currentState.Core.authorised && previousValue.Core.authorised !== this.currentState.Core.authorised){
-            this.getKey()
+            this.updateKey()
         }
-         
+
+        //users changed
+        if (this.currentState.User.key && previousValue.User.key !== this.currentState.User.key){
+            this.updateUserBalance()
+        } 
     }
 
 
@@ -60,11 +64,18 @@ class Credux {
         })
     }
 
-    getKey(){
+    updateKey(){
         this.getAPI().getKey((key) => {
             this.store.dispatch(User.key(key))
         })
     }
+
+    updateUserBalance(){
+        this.getAPI().balanceGet(this.store.getState().User.key , (balance) => {
+            this.store.dispatch(User.balance(balance))
+        })
+    }
+
 
 }
 

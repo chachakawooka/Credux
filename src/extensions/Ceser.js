@@ -18,5 +18,14 @@ export default class Crext{
         })
         
     }
+
+    balanceGet(key,callback){
+        window.CreditsExtension.balanceGet({Key:key},(r) => {
+            if(r.result){
+                return callback(r.result.Credits_CS);
+            }
+            return callback(null);;
+        })
+    }
     
 }

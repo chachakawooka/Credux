@@ -12,8 +12,29 @@ class Credux {
 
     constructor(store) {
         this.store = store || generateStore;
+        this.currentState = this.store.getState();
         window.addEventListener('load', this.checkExtension.bind(this) );
+        window.addEventListener('load', function(){
+            this.store.subscribe(this.changeHandler.bind(this))
+        }.bind(this));
     }
+
+    changeHandler(){
+        let previousValue = this.currentState
+        this.currentState = this.store.getState()
+        
+        //extension loaded
+        if (this.currentState.Core.extension && previousValue.Core.extension !== this.currentState.Core.extension) {
+            this.authorise();
+        }
+
+        //load user data on auth
+        if (this.currentState.Core.authorised && previousValue.Core.authorised !== this.currentState.Core.authorised){
+            this.getKey()
+        }
+         
+    }
+
 
     checkExtension() {
         if (typeof (window.CREXT) !== 'undefined') {
@@ -36,9 +57,6 @@ class Credux {
     authorise(){
         this.getAPI().authorise((authorised) => {
             this.store.dispatch(Core.authorised(authorised));
-            if(authorised){ //setup User info 
-                this.getKey();
-            }
         })
     }
 

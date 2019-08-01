@@ -6,10 +6,7 @@ const credux = new Credux();
 class Test extends Component {
 
   componentWillReceiveProps(nextProps) {
-    //connected to an extension
-    if (nextProps.Core.extension && nextProps.Core.extension !== this.props.Core.extension) {
-      credux.authorise();
-    }
+
   }
 
   render() {

@@ -6,7 +6,14 @@ const credux = new Credux();
 class Test extends Component {
 
   componentWillReceiveProps(nextProps) {
-
+    //authorised
+    if (nextProps.Core.authorised && nextProps.Core.authorised !== this.props.Core.authorised) {
+      //get some wallet balances
+      credux.updateBalance('G251yALHEF2ZJU38BwRNjrZfxmCkDVdvQSpURPATgT3f');
+      credux.updateBalance('HMxB2dxizJuonfksbwzwYChX6VaJp9JfUCF3cNduUB3r');
+      credux.updateBalance('AgsCo5c42tc6hEmUHTUMTCxNjNETZXzeyLe6dU3ZJVXQ');
+      credux.updateBalance('EyRAeymxLgVMupjrQLLkAwCCefrWhF3AssY364G1qrET');
+    }
   }
 
   render() {
@@ -24,6 +31,16 @@ class Test extends Component {
             <dd>{this.props.User.balance}</dd>
           </dl>
         }
+
+        <h4>state.Wallet.balances</h4>
+        {this.props.Wallet.balances.map((wallet, index) => {
+          return (<dl>
+            <dt>.key</dt>
+            <dd>{wallet.key}</dd>
+            <dt>.balance</dt>
+            <dd>{wallet.balance}</dd>
+          </dl>)
+        })}
       </div>
     )
   }
@@ -31,7 +48,8 @@ class Test extends Component {
 
 const mapStateToProps = state => ({
   Core: state.Core,
-  User: state.User
+  User: state.User,
+  Wallet: state.Wallet
 });
 
 export default connect(

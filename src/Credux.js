@@ -3,6 +3,7 @@ import generateStore from './store.js'
 //actions
 import * as Core from './actions/Core'
 import * as User from './actions/User'
+import * as Wallet from './actions/Wallet'
 
 //extensions
 import Crext from './extensions/Crext';
@@ -73,6 +74,12 @@ class Credux {
     updateUserBalance(){
         this.getAPI().balanceGet(this.store.getState().User.key , (balance) => {
             this.store.dispatch(User.balance(balance))
+        })
+    }
+
+    updateBalance(key){
+        this.getAPI().balanceGet(key , (balance) => {
+            this.store.dispatch(Wallet.balance(key, balance))
         })
     }
 

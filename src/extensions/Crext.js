@@ -2,7 +2,13 @@ export default class Crext {
 
 
     authorise(callback) {
-        return callback(true);
+        return callback(window.CREXT.network((r) => {
+            if(r.success){
+                return callback(true);
+            }
+            return callback(false);
+        }
+        ));
     }
 
     getKey(callback) {

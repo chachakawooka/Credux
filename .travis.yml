@@ -35,7 +35,7 @@ jobs:
       deploy:
         provider: pages
         skip_cleanup: true
-        github_token: $GITHUB_TOKEN
+        github_token: $CREDUX_GITHUB_TOKEN
         local_dir: demo/dist
         on:
           branch: master

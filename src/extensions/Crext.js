@@ -14,7 +14,7 @@ export default class Crext {
     getKey(callback) {
         return callback(window.CREXT.getKey().then((r) => {
             if (r.success) {
-                return callback(r.result);
+                return callback(r.result.publicKey);
             }
             return callback(null);;
         }

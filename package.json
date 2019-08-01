@@ -1,6 +1,6 @@
 {
   "name": "credux",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React component for use with Credits Blockchain",
   "main": "lib/index.js",
   "module": "es/index.js",

@@ -1,5 +1,12 @@
 import generateStore from './store.js'
+
+//actions
 import * as Core from './actions/Core'
+import * as User from './actions/User'
+
+//extensions
+import Crext from './extensions/Crext';
+import Ceser from './extensions/Ceser';
 
 class Credux {
 
@@ -9,7 +16,6 @@ class Credux {
     }
 
     checkExtension() {
-        console.log(window);
         if (typeof (window.CREXT) !== 'undefined') {
             this.store.dispatch(Core.extension('CREXT'));
         }else if (typeof (window.CreditsExtension) !== 'undefined') {
@@ -17,6 +23,29 @@ class Credux {
         } else {
             this.store.dispatch(Core.extension(false));
         }
+    }
+
+    getAPI(){
+        if(this.store.getState().Core.extension == 'CESER'){
+           return new Ceser()
+        }else if(this.store.getState().Core.extension == 'CREXT'){
+           return new Crext()
+        }
+    }
+
+    authorise(){
+        this.getAPI().authorise((authorised) => {
+            this.store.dispatch(Core.authorised(authorised));
+            if(authorised){ //setup User info 
+                this.getKey();
+            }
+        })
+    }
+
+    getKey(){
+        this.getAPI().getKey((key) => {
+            this.store.dispatch(User.key(key))
+        })
     }
 
 }

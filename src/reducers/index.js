@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import core from './Core'
-import coreAgain from './Core'
+import Core from './Core'
+import User from './User'
 
 const reducers = combineReducers({
-    core,
-    coreAgain
+    Core,
+    User
 })
 
 export default reducers

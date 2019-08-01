@@ -4,7 +4,7 @@ const initialState = {
   extension: false
 }
 
-const coreReducer = (state, action) => {
+const coreReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREDUX_EXTENSION':
       return {

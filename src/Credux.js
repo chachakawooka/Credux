@@ -5,15 +5,15 @@ class Credux {
 
     constructor(store) {
         this.store = store || generateStore;
-        this.checkExtension();
+        window.addEventListener('load', this.checkExtension.bind(this) );
     }
 
     checkExtension() {
-
-        if (typeof (window.CreditsExtension) !== 'undefined') {
+        console.log(window);
+        if (typeof (window.CREXT) !== 'undefined') {
+            this.store.dispatch(Core.extension('CREXT'));
+        }else if (typeof (window.CreditsExtension) !== 'undefined') {
             this.store.dispatch(Core.extension('CESER'));
-        }else if (typeof (window.CREXT) !== 'undefined') {
-            tthis.store.dispatch(Core.extension('CREXT'));
         } else {
             this.store.dispatch(Core.extension(false));
         }

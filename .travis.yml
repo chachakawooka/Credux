@@ -30,3 +30,13 @@ jobs:
         api_key: $NPM_TOKEN
         on:
           branch: master
+    - stage: deploy
+      script: yarn demoBuild 
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        local_dir: demo/dist
+        on:
+          branch: master
+    

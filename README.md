@@ -66,10 +66,13 @@ credux.updateBalance(publicKey)
 ```
 #### state.Wallet
 ```
-state.Wallet.balances[
-  {key:'thePublicKey', balance: 251.22},
-  {key:'anotherPublicKey', balance: 2.1038}
-]
+{
+balances: 
+  [
+    {key:'thePublicKey', balance: 251.22},
+    {key:'anotherPublicKey', balance: 2.1038}
+  ]
+}
 ```
 
 
